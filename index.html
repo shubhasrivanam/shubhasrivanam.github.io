@@ -37,7 +37,10 @@
     background: linear-gradient(135deg, var(--accent), #3aa8ff);
     display:flex; align-items:center; justify-content:center;
     font-family:var(--mono); font-weight:700; font-size:20px; color:#0b0d0f;
-    margin-bottom:18px;
+    margin-bottom:18px; overflow:hidden;
+  }
+  .avatar img{
+    width:100%; height:100%; object-fit:cover; border-radius:50%;
   }
   .sidebar h1{ font-size:1.15rem; color:#f2f5f7; }
   .sidebar .tag{ font-family:var(--mono); font-size:12px; color:var(--accent); margin-top:6px; }
@@ -146,7 +149,7 @@
 
   <aside class="sidebar">
     <div>
-      <div class="avatar">SV</div>
+      <div class="avatar"><img src="profile.jpg" alt="Shubhasri Vanam"></div>
       <h1>Shubhasri Vanam</h1>
       <div class="tag">Software Engineer</div>
     </div>
@@ -245,6 +248,22 @@
             <ul>
               <li>Log ingestion pipeline in C++ with a gRPC interface on GCP Cloud Run, supporting 10K+ events/sec at sub-10ms p99 latency.</li>
               <li>Optimized serialization with Protocol Buffers and batch compression, cutting bandwidth usage by 40%.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>CareerCompanion — AI Resume Optimizer</h3>
+            <div class="stack">Python · Flask · SBERT · T5 · spaCy · BM25/TF-IDF</div>
+            <ul>
+              <li>Built an AI-powered resume optimization web app combining BM25/TF-IDF keyword matching with SBERT semantic similarity to score resume-job fit.</li>
+              <li>Added a T5-based cover letter generation engine and spaCy-driven entity extraction for structured resume parsing.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Zero-Shot DNS Exfiltration Detection</h3>
+            <div class="stack">LLaMA 3.1 8B · Groq API · Python</div>
+            <ul>
+              <li>Designed a zero-shot LLM-based detector for DNS data exfiltration using LLaMA 3.1 8B served via the Groq API.</li>
+              <li>Evaluated detection performance against the CIC-Bell-DNS-EXF-2021 benchmark dataset as part of a network security research project.</li>
             </ul>
           </div>
         </div>
