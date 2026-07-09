@@ -3,332 +3,341 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shubhasri Vanam — Portfolio</title>
+<title>Shubhasri Vanam — Systems Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0e1013;
-    --panel: #161a1e;
-    --panel-2: #1c2126;
-    --line: #262c32;
-    --text: #dfe4e8;
-    --muted: #8a939c;
-    --accent: #5ee6a8;
-    --accent-dim: rgba(94,230,168,0.12);
-    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-    --mono: 'SF Mono', 'JetBrains Mono', Consolas, monospace;
+    --bg: #0f1319;
+    --bg-2: #0c1015;
+    --panel: #161b22;
+    --panel-2: #1b222b;
+    --line: #2a323d;
+    --line-soft: #1f2731;
+    --text: #e6edf3;
+    --muted: #7d8b9a;
+    --muted-dim: #56626f;
+    --accent: #e8934a;
+    --accent-dim: rgba(232,147,74,0.14);
+    --accent-2: #5fb3d9;
+    --accent-2-dim: rgba(95,179,217,0.14);
+    --ok: #5ee6a8;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --radius: 8px;
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
   body{
-    background: var(--bg); color: var(--text); font-family: var(--sans);
-    line-height:1.6; -webkit-font-smoothing:antialiased;
-    display:flex; min-height:100vh;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(232,147,74,0.06), transparent 60%),
+      radial-gradient(1000px 500px at 100% 10%, rgba(95,179,217,0.05), transparent 60%),
+      var(--bg);
+    color: var(--text); font-family: var(--sans); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
   }
   a{ color:inherit; }
+  ::selection{ background: var(--accent-dim); color: var(--text); }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
 
-  /* ---------- sidebar nav ---------- */
-  .sidebar{
-    width: 240px; flex-shrink:0; background: var(--panel);
-    border-right:1px solid var(--line); padding: 40px 28px;
-    position: sticky; top:0; height:100vh; display:flex; flex-direction:column;
+  .wrap{ max-width: 920px; margin:0 auto; padding: 0 28px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+
+  /* ---------- header ---------- */
+  header{
+    position: sticky; top:0; z-index:40;
+    background: rgba(15,19,25,0.82); backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line-soft);
   }
-  .avatar{
-    width:64px; height:64px; border-radius:50%;
-    background: linear-gradient(135deg, var(--accent), #3aa8ff);
+  .headbar{
+    max-width:920px; margin:0 auto; padding: 14px 28px;
+    display:flex; align-items:center; gap:18px;
+  }
+  @media (max-width:640px){ .headbar{ padding:12px 20px; } }
+  .mono-mark{
+    width:34px; height:34px; border-radius:7px; flex-shrink:0;
+    background: var(--panel-2); border:1px solid var(--line);
     display:flex; align-items:center; justify-content:center;
-    font-family:var(--mono); font-weight:700; font-size:20px; color:#0b0d0f;
-    margin-bottom:18px; overflow:hidden;
+    font-family:var(--mono); font-weight:700; font-size:13px; color:var(--accent);
+    overflow:hidden;
   }
-  .avatar img{
-    width:100%; height:100%; object-fit:cover; border-radius:50%;
-  }
-  .sidebar h1{ font-size:1.15rem; color:#f2f5f7; }
-  .sidebar .tag{ font-family:var(--mono); font-size:12px; color:var(--accent); margin-top:6px; }
-  nav{ margin-top:40px; }
-  nav a{
-    display:block; text-decoration:none; font-size:14px; color:var(--muted);
-    padding:9px 0; border-left:2px solid transparent; padding-left:12px;
-    transition: color .15s ease, border-color .15s ease;
-  }
-  nav a:hover{ color:var(--text); border-color:var(--line); }
-  .sidebar-footer{ margin-top:auto; padding-top:30px; }
-  .cv-btn{
-    display:block; text-align:center; font-family:var(--mono); font-size:13px;
-    background: var(--accent); color:#0b0d0f; padding:10px 14px; border-radius:4px;
-    text-decoration:none; font-weight:600; margin-bottom:16px;
-  }
-  .social{ display:flex; gap:14px; }
-  .social a{
-    font-family:var(--mono); font-size:12px; color:var(--muted); text-decoration:none;
-    border:1px solid var(--line); padding:6px 10px; border-radius:3px;
-  }
-  .social a:hover{ color:var(--accent); border-color:var(--accent); }
+  .mono-mark img{ width:100%; height:100%; object-fit:cover; border-radius:6px; }
+  .id-block{ line-height:1.25; }
+  .id-block .name{ font-size:14.5px; font-weight:600; color:#f4f7fa; }
+  .id-block .status{ font-family:var(--mono); font-size:11px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+  .dot-live{ width:6px; height:6px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 3px rgba(94,230,168,0.15); flex-shrink:0; }
 
-  @media (max-width: 860px){
-    body{ flex-direction:column; }
-    .sidebar{ width:100%; height:auto; position:relative; padding:28px 24px; }
-    nav{ display:flex; flex-wrap:wrap; gap:4px 18px; margin-top:20px; }
-    nav a{ padding:4px 0; border-left:none; padding-left:0; }
+  nav.top{ margin-left:auto; display:flex; align-items:center; gap:2px; }
+  nav.top a{
+    font-family:var(--mono); font-size:12.5px; color:var(--muted); text-decoration:none;
+    padding:8px 12px; border-radius:6px; transition: color .15s ease, background .15s ease;
   }
+  nav.top a:hover, nav.top a.active{ color:var(--text); background:var(--panel-2); }
+  @media (max-width:760px){ nav.top{ display:none; } }
 
-  /* ---------- main content ---------- */
-  main{ flex:1; min-width:0; }
-  .wrap{ max-width: 760px; margin:0 auto; padding: 0 32px; }
+  .kbtn{
+    font-family:var(--mono); font-size:11.5px; color:var(--muted);
+    background:var(--panel-2); border:1px solid var(--line); border-radius:6px;
+    padding:7px 10px; display:flex; align-items:center; gap:6px; cursor:pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .kbtn:hover{ border-color:var(--accent); color:var(--text); }
+  .kbtn kbd{ font-family:inherit; background:var(--bg-2); border:1px solid var(--line); border-radius:3px; padding:1px 5px; font-size:10.5px; }
 
-  section{ padding: 70px 0; border-bottom:1px solid var(--line); }
+  /* ---------- sections ---------- */
+  section{ padding: 76px 0; border-bottom:1px solid var(--line-soft); }
   section:last-of-type{ border-bottom:none; }
   .eyebrow{
-    font-family:var(--mono); font-size:12px; color:var(--accent);
-    text-transform:uppercase; letter-spacing:.08em; margin-bottom:14px;
+    font-family:var(--mono); font-size:11.5px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:.1em; margin-bottom:16px;
+    display:flex; align-items:center; gap:8px;
   }
-  h2{ font-size:1.6rem; color:#f2f5f7; margin-bottom:26px; }
+  .eyebrow::before{ content:''; width:14px; height:1px; background:var(--accent); }
+  h2{ font-family:var(--mono); font-size:1.5rem; font-weight:600; color:#f4f7fa; margin-bottom:8px; letter-spacing:-0.01em; }
+  .section-sub{ color:var(--muted); font-size:.95rem; max-width:56ch; margin-bottom:36px; }
 
-  /* hero */
-  #hero{ padding-top:90px; }
-  #hero h1{ font-size:clamp(2rem,4.5vw,2.8rem); color:#f2f5f7; font-weight:700; letter-spacing:-0.02em; }
-  #hero .role{ font-family:var(--mono); font-size:15px; color:var(--muted); margin-top:10px; }
-  #hero p.lede{ margin-top:20px; max-width:56ch; color:var(--text); }
-
-  /* timeline (experience/education) */
-  .timeline{ position:relative; padding-left: 26px; }
-  .timeline::before{
-    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line);
+  /* ---------- hero ---------- */
+  #hero{ padding-top:72px; padding-bottom:0; }
+  #hero h1{
+    font-family:var(--mono); font-size:clamp(1.7rem,4vw,2.5rem); font-weight:600;
+    color:#f4f7fa; letter-spacing:-0.02em; line-height:1.3; max-width:16ch;
   }
-  .titem{ position:relative; margin-bottom:36px; }
-  .titem:last-child{ margin-bottom:0; }
-  .titem::before{
-    content:''; position:absolute; left:-26px; top:5px; width:9px; height:9px; border-radius:50%;
-    background: var(--accent); box-shadow:0 0 0 3px var(--accent-dim);
+  #hero h1 .accent-word{ color:var(--accent); }
+  #hero p.lede{ margin-top:18px; max-width:54ch; color:var(--muted); font-size:1rem; }
+  .hero-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .hero-tags span{
+    font-family:var(--mono); font-size:11.5px; color:var(--accent-2);
+    background:var(--accent-2-dim); border:1px solid rgba(95,179,217,0.25);
+    padding:5px 10px; border-radius:20px;
   }
-  .titem .when{ font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:4px; }
-  .titem h3{ font-size:1.02rem; color:#f2f5f7; }
-  .titem .org{ color:var(--accent); font-weight:500; }
-  .titem .loc{ font-family:var(--mono); font-size:12px; color:var(--muted); margin:2px 0 10px; }
-  .titem ul{ list-style:none; }
-  .titem ul li{ position:relative; padding-left:16px; margin-bottom:7px; font-size:.94rem; color:var(--text); }
-  .titem ul li::before{ content:'›'; position:absolute; left:0; color:var(--accent); font-family:var(--mono); }
-  .titem .degree{ font-size:.9rem; color:var(--muted); margin-top:2px; }
-  .titem .gpa{ font-family:var(--mono); font-size:12px; color:var(--accent); margin-top:4px; }
 
-  /* skills as tags */
-  .skill-group{ margin-bottom:20px; }
-  .skill-group:last-child{ margin-bottom:0; }
-  .skill-group .cat{ font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:10px; }
-  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
-  .tags span{
+  /* ---------- pipeline (career graph) ---------- */
+  .pipeline-hint{ font-family:var(--mono); font-size:11.5px; color:var(--muted-dim); margin-top:44px; margin-bottom:6px; }
+  .pipeline{
+    position:relative; display:flex; align-items:flex-start; gap:0;
+    margin-top:14px; overflow-x:auto; padding-bottom:8px; padding-top:6px;
+    scrollbar-width: thin;
+  }
+  .pnode{ position:relative; flex:1 0 150px; min-width:150px; text-align:left; padding-right:0; }
+  .pnode:last-child .pline{ display:none; }
+  .pline{
+    position:absolute; top:15px; left:calc(50% + 16px); right:calc(-50% + 16px);
+    height:2px; background: linear-gradient(90deg, var(--line) 0%, var(--line) 100%);
+    background-image: repeating-linear-gradient(90deg, var(--muted-dim) 0 6px, transparent 6px 12px);
+    animation: flow 1.6s linear infinite;
+  }
+  @keyframes flow{ from{ background-position:0 0; } to{ background-position:-18px 0; } }
+  .pdot-btn{
+    all:unset; cursor:pointer; display:flex; flex-direction:column; align-items:flex-start; gap:10px; width:100%;
+  }
+  .pdot{
+    width:15px; height:15px; border-radius:50%; background:var(--panel-2);
+    border:2px solid var(--muted-dim); flex-shrink:0; position:relative; z-index:2;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .pnode[data-type="now"] .pdot{ border-color:var(--ok); }
+  .pdot-btn[aria-expanded="true"] .pdot{ background:var(--accent); border-color:var(--accent); box-shadow:0 0 0 4px var(--accent-dim); }
+  .pdot-btn:hover .pdot{ border-color:var(--accent); }
+  .pmeta{ font-family:var(--mono); font-size:10.5px; color:var(--muted-dim); }
+  .ptitle{ font-size:13.5px; font-weight:600; color:var(--text); line-height:1.35; padding-right:14px; }
+  .porg{ font-size:12px; color:var(--muted); }
+  .pdot-btn[aria-expanded="true"] .ptitle{ color:var(--accent); }
+
+  .pdetail{
+    display:none; margin-top:26px; background:var(--panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:26px 28px;
+  }
+  .pdetail.open{ display:block; }
+  .pdetail .dhead{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
+  .pdetail .dtitle{ font-size:1.02rem; font-weight:600; color:#f4f7fa; }
+  .pdetail .dorg{ color:var(--accent); }
+  .pdetail .dwhen{ font-family:var(--mono); font-size:12px; color:var(--muted); }
+  .pdetail .dloc{ font-family:var(--mono); font-size:11.5px; color:var(--muted-dim); margin-bottom:16px; }
+  .pdetail ul{ list-style:none; }
+  .pdetail ul li{ position:relative; padding-left:18px; margin-bottom:9px; font-size:.92rem; color:var(--text); }
+  .pdetail ul li::before{ content:'›'; position:absolute; left:0; color:var(--accent); font-family:var(--mono); }
+  .pdetail .gpa-line{ font-family:var(--mono); font-size:12px; color:var(--ok); margin-top:4px; }
+
+  /* ---------- projects ---------- */
+  .services{ display:flex; flex-direction:column; gap:12px; }
+  .svc{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+  .svc-head{
+    all:unset; cursor:pointer; display:flex; width:100%; align-items:center; gap:16px;
+    padding:18px 22px; box-sizing:border-box;
+  }
+  .svc-status{ width:8px; height:8px; border-radius:50%; background:var(--ok); flex-shrink:0; box-shadow:0 0 0 3px rgba(94,230,168,0.12); }
+  .svc-titles{ flex:1; min-width:0; }
+  .svc-titles h3{ font-size:.98rem; color:#f4f7fa; font-weight:600; }
+  .svc-stack{ font-family:var(--mono); font-size:11px; color:var(--muted-dim); margin-top:3px; }
+  .svc-metric{
+    font-family:var(--mono); font-size:11px; color:var(--accent-2); text-align:right;
+    white-space:nowrap; display:none;
+  }
+  @media (min-width:680px){ .svc-metric{ display:block; } }
+  .svc-chevron{ font-family:var(--mono); color:var(--muted); transition: transform .2s ease; flex-shrink:0; }
+  .svc.open .svc-chevron{ transform: rotate(90deg); color:var(--accent); }
+  .svc-body{ max-height:0; overflow:hidden; transition: max-height .25s ease; }
+  .svc.open .svc-body{ max-height:400px; }
+  .svc-body-inner{ padding: 0 22px 22px 22px; border-top:1px solid var(--line-soft); margin-top:2px; }
+  .svc-body ul{ list-style:none; padding-top:16px; }
+  .svc-body ul li{ position:relative; padding-left:18px; margin-bottom:9px; font-size:.9rem; color:var(--text); }
+  .svc-body ul li::before{ content:'›'; position:absolute; left:0; color:var(--accent); font-family:var(--mono); }
+  .svc-metric-mobile{ font-family:var(--mono); font-size:11px; color:var(--accent-2); padding-top:14px; }
+  @media (min-width:680px){ .svc-metric-mobile{ display:none; } }
+
+  /* ---------- stack ---------- */
+  .stack-layers{ display:flex; flex-direction:column; }
+  .layer{ display:flex; gap:24px; padding:16px 0; border-top:1px solid var(--line-soft); }
+  .layer:first-child{ border-top:none; }
+  .layer-label{
+    font-family:var(--mono); font-size:11.5px; color:var(--muted); width:150px; flex-shrink:0;
+    padding-top:6px;
+  }
+  @media (max-width:600px){ .layer{ flex-direction:column; gap:8px; } .layer-label{ width:auto; } }
+  .layer-tags{ display:flex; flex-wrap:wrap; gap:8px; flex:1; }
+  .layer-tags span{
     font-family:var(--mono); font-size:12.5px; color:var(--text);
-    background:var(--panel-2); border:1px solid var(--line); padding:6px 11px; border-radius:4px;
+    background:var(--panel-2); border:1px solid var(--line); padding:6px 11px; border-radius:5px;
   }
 
-  /* projects */
-  .projects{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  @media (max-width:640px){ .projects{ grid-template-columns:1fr; } }
-  .card{
-    background:var(--panel-2); border:1px solid var(--line); border-radius:6px; padding:22px;
-    display:flex; flex-direction:column;
-  }
-  .card h3{ font-size:1rem; color:#f2f5f7; margin-bottom:6px; }
-  .stack{ font-family:var(--mono); font-size:11px; color:var(--accent); margin-bottom:12px; }
-  .card ul{ list-style:none; margin-bottom:0; }
-  .card ul li{ position:relative; padding-left:16px; margin-bottom:7px; font-size:.88rem; color:var(--text); }
-  .card ul li::before{ content:'›'; position:absolute; left:0; color:var(--accent); font-family:var(--mono); }
+  /* ---------- education ---------- */
+  .edu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:600px){ .edu-grid{ grid-template-columns:1fr; } }
+  .edu-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px; }
+  .edu-when{ font-family:var(--mono); font-size:11.5px; color:var(--muted-dim); margin-bottom:8px; }
+  .edu-card h3{ font-size:.98rem; color:#f4f7fa; margin-bottom:4px; }
+  .edu-degree{ font-size:.88rem; color:var(--muted); margin-bottom:8px; }
+  .edu-gpa{ font-family:var(--mono); font-size:11.5px; color:var(--ok); }
 
-  /* contact */
-  .contact-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:6px; }
-  .contact-row a{
-    display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13.5px;
-    text-decoration:none; color:var(--text); border:1px solid var(--line); padding:12px 18px;
-    border-radius:5px; transition:border-color .15s ease, color .15s ease;
+  /* ---------- contact ---------- */
+  .contact-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+  .contact-row a, .contact-row button{
+    display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    text-decoration:none; color:var(--text); border:1px solid var(--line); background:var(--panel);
+    padding:12px 18px; border-radius:6px; cursor:pointer; transition:border-color .15s ease, color .15s ease;
   }
-  .contact-row a:hover{ border-color:var(--accent); color:var(--accent); }
+  .contact-row a:hover, .contact-row button:hover{ border-color:var(--accent); color:var(--accent); }
+  .contact-row .primary{ background:var(--accent); color:#191008; border-color:var(--accent); font-weight:600; }
+  .contact-row .primary:hover{ color:#191008; opacity:.9; }
 
-  footer{ padding:36px 0; font-family:var(--mono); font-size:12px; color:var(--muted); text-align:center; }
+  footer{ padding:36px 0; font-family:var(--mono); font-size:11.5px; color:var(--muted-dim); text-align:center; }
+
+  /* ---------- command palette ---------- */
+  .cmdk-scrim{
+    position:fixed; inset:0; background:rgba(6,8,10,0.65); backdrop-filter: blur(2px);
+    z-index:100; display:none; align-items:flex-start; justify-content:center; padding-top:14vh;
+  }
+  .cmdk-scrim.show{ display:flex; }
+  .cmdk-panel{
+    width:92%; max-width:440px; background:var(--panel); border:1px solid var(--line);
+    border-radius:10px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .cmdk-input{
+    width:100%; background:var(--panel-2); border:none; border-bottom:1px solid var(--line);
+    color:var(--text); font-family:var(--mono); font-size:14px; padding:16px 18px; outline:none;
+  }
+  .cmdk-list{ max-height:280px; overflow-y:auto; padding:8px; }
+  .cmdk-item{
+    display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:6px;
+    cursor:pointer; font-size:13.5px; color:var(--text);
+  }
+  .cmdk-item .tag{ margin-left:auto; font-family:var(--mono); font-size:10.5px; color:var(--muted-dim); }
+  .cmdk-item.active{ background:var(--accent-dim); color:var(--accent); }
+  .cmdk-empty{ padding:20px; text-align:center; color:var(--muted-dim); font-family:var(--mono); font-size:12.5px; }
 </style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div>
-      <div class="avatar"><img src="profile.jpg" alt="Shubhasri Vanam"></div>
-      <h1>Shubhasri Vanam</h1>
-      <div class="tag">Software Engineer</div>
-    </div>
-    <nav>
-      <a href="#hero">Home</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="sidebar-footer">
-      <a class="cv-btn" href="mailto:shubhasri.work@gmail.com">Get in touch</a>
-      <div class="social">
-        <a href="https://linkedin.com/in/shubhasrivanam" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+  <header>
+    <div class="headbar">
+      <div class="mono-mark"><img src="profile.jpg" alt="Shubhasri Vanam"></div>
+      <div class="id-block">
+        <div class="name">Shubhasri Vanam</div>
+        <div class="status"><span class="dot-live"></span> open to relocation · San Jose, CA</div>
       </div>
+      <nav class="top">
+        <a href="#path">Path</a>
+        <a href="#projects">Projects</a>
+        <a href="#stack">Stack</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="kbtn" id="cmdk-trigger" aria-haspopup="dialog"><span>Search</span><kbd>⌘K</kbd></button>
     </div>
-  </aside>
+  </header>
 
   <main>
     <div class="wrap">
 
       <section id="hero">
-        <div class="eyebrow">// hello, I'm</div>
-        <h1>Shubhasri Vanam</h1>
-        <div class="role">distributed systems · cloud infrastructure · observability</div>
+        <div class="eyebrow">// backend & infrastructure</div>
+        <h1>I build backend systems — and the <span class="accent-word">infrastructure</span> that keeps them running at scale.</h1>
         <p class="lede">
-          Software Engineer with 2+ years designing and operating large-scale distributed
-          systems across AWS and GCP. Deep experience in distributed orchestration,
-          infrastructure automation, and performance engineering — built and ran
-          reliability-focused systems handling petabyte-scale data and millions of daily requests.
+          Two years building APIs and services, plus the distributed systems, orchestration layers, and
+          observability tooling that keep them running under petabyte-scale load. Lately: LLM inference
+          pipelines and agent infrastructure.
         </p>
-      </section>
-
-      <section id="experience">
-        <div class="eyebrow">// career</div>
-        <h2>Work Experience</h2>
-        <div class="timeline">
-
-          <div class="titem">
-            <div class="when">May 2025 – Aug 2025</div>
-            <h3>Software Engineering Intern · <span class="org">PayPal</span></h3>
-            <div class="loc">San Jose, California</div>
-            <ul>
-              <li>Engineered a deduplication layer for the Export API using distributed tracing, reducing p99 latency by 33% across 7M+ daily requests.</li>
-              <li>Implemented circuit breakers and retry-with-backoff for downstream dependencies, cutting service-related error rates by 40%.</li>
-              <li>Built Datadog-based observability across 8+ services and 5M+ customer profiles, reducing MTTD 40% and eliminating 720+ hours/year of manual analysis.</li>
-            </ul>
-          </div>
-
-          <div class="titem">
-            <div class="when">Aug 2022 – Aug 2024</div>
-            <h3>Software Development Engineer II · <span class="org">JPMorgan Chase &amp; Co.</span></h3>
-            <div class="loc">Hyderabad, India</div>
-            <ul>
-              <li>Built a Data Movement Service migrating 4 PB/day from on-prem to AWS S3, enabling cloud adoption across 1,500+ engineering teams.</li>
-              <li>Architected a distributed orchestration layer dynamically provisioning GKE agents — 5× parallelism, 45% lower scheduling latency.</li>
-              <li>Implemented file size-aware workload partitioning, increasing average transfer size by 35%.</li>
-              <li>Designed SQS Dead Letter Queue recovery workflows, auto-resolving 99.9% of failed transfers at petabyte scale.</li>
-              <li>Built the Interactive EMR Cluster Controller (EMRCC) with REST APIs, driving adoption across 40% of the firm's Big Data workloads.</li>
-              <li>Re-architected EMRCC as a serverless platform (Lambda, ALB, SQS, SNS, S3), cutting idle resource usage by 90%.</li>
-              <li>Automated multi-account infrastructure provisioning with Terraform, reducing environment setup time by 85%.</li>
-              <li>Reviewed Terraform modules and infra configs across a 12-engineer team, enforcing deployment standards.</li>
-            </ul>
-          </div>
-
-          <div class="titem">
-            <div class="when">Feb 2022 – Aug 2022</div>
-            <h3>Software Engineering Intern · <span class="org">JPMorgan Chase &amp; Co.</span></h3>
-            <div class="loc">Hyderabad, India</div>
-            <ul>
-              <li>Researched and designed an event-driven architecture for on-demand EMR cluster automation; the approved design shaped the production EMRCC architecture.</li>
-              <li>Built a Quick Cluster spin-up PoC for self-service cluster creation, scheduling, and monitoring, validating EMRCC's foundation.</li>
-            </ul>
-          </div>
-
+        <div class="hero-tags">
+          <span>backend services</span>
+          <span>distributed systems</span>
+          <span>cloud infrastructure</span>
+          <span>observability</span>
+          <span>AI infra</span>
         </div>
+
+        <div class="pipeline-hint">// career pipeline — click a node</div>
+        <div class="pipeline" id="pipeline" role="list"></div>
+        <div class="pdetail" id="pdetail"></div>
       </section>
 
       <section id="projects">
         <div class="eyebrow">// build</div>
         <h2>Projects</h2>
-        <div class="projects">
-          <div class="card">
-            <h3>Distributed Key-Value Store</h3>
-            <div class="stack">C++ · gRPC · Raft · Consistent Hashing · Prometheus</div>
-            <ul>
-              <li>Fault-tolerant KV store using Raft consensus, leader election, and log replication across a 5-node cluster — 99.9% write durability under single-node failures.</li>
-              <li>Consistent hashing partitioning with virtual nodes, sustaining 20,000 ops/sec at sub-5ms p99 latency under network partitions.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>High-Throughput Log Aggregation System</h3>
-            <div class="stack">C++ · gRPC · Protocol Buffers · Prometheus · GCP Cloud Run</div>
-            <ul>
-              <li>Log ingestion pipeline in C++ with a gRPC interface on GCP Cloud Run, supporting 10K+ events/sec at sub-10ms p99 latency.</li>
-              <li>Optimized serialization with Protocol Buffers and batch compression, cutting bandwidth usage by 40%.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>CareerCompanion — AI Resume Optimizer</h3>
-            <div class="stack">Python · Flask · SBERT · T5 · spaCy · BM25/TF-IDF</div>
-            <ul>
-              <li>Built an AI-powered resume optimization web app combining BM25/TF-IDF keyword matching with SBERT semantic similarity to score resume-job fit.</li>
-              <li>Added a T5-based cover letter generation engine and spaCy-driven entity extraction for structured resume parsing.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Zero-Shot DNS Exfiltration Detection</h3>
-            <div class="stack">LLaMA 3.1 8B · Groq API · Python</div>
-            <ul>
-              <li>Designed a zero-shot LLM-based detector for DNS data exfiltration using LLaMA 3.1 8B served via the Groq API.</li>
-              <li>Evaluated detection performance against the CIC-Bell-DNS-EXF-2021 benchmark dataset as part of a network security research project.</li>
-            </ul>
-          </div>
-        </div>
+        <p class="section-sub">Things built outside of work, each running at whatever scale it takes to prove the idea.</p>
+        <div class="services" id="services"></div>
       </section>
 
-      <section id="skills">
+      <section id="stack">
         <div class="eyebrow">// toolkit</div>
-        <h2>Skills</h2>
-        <div class="skill-group">
-          <div class="cat">Languages</div>
-          <div class="tags"><span>Java</span><span>Python</span><span>C++</span><span>SQL</span></div>
-        </div>
-        <div class="skill-group">
-          <div class="cat">Cloud &amp; Infrastructure</div>
-          <div class="tags"><span>GCP</span><span>AWS</span><span>Kubernetes</span><span>Docker</span><span>Terraform</span></div>
-        </div>
-        <div class="skill-group">
-          <div class="cat">Data &amp; Databases</div>
-          <div class="tags"><span>Apache Spark</span><span>PostgreSQL</span><span>Redis</span><span>DynamoDB</span><span>MongoDB</span><span>Cassandra</span></div>
-        </div>
-        <div class="skill-group">
-          <div class="cat">Messaging &amp; Streaming</div>
-          <div class="tags"><span>Apache Kafka</span><span>RabbitMQ</span><span>AWS SQS/SNS</span><span>Pub/Sub</span></div>
-        </div>
-        <div class="skill-group">
-          <div class="cat">Backend &amp; APIs</div>
-          <div class="tags"><span>REST APIs</span><span>FastAPI</span><span>gRPC</span><span>GraphQL</span></div>
-        </div>
-        <div class="skill-group">
-          <div class="cat">CI/CD &amp; DevOps</div>
-          <div class="tags"><span>Jenkins</span><span>GitHub Actions</span><span>Bitbucket</span><span>Git</span></div>
-        </div>
-        <div class="skill-group">
-          <div class="cat">Observability</div>
-          <div class="tags"><span>Datadog</span><span>Prometheus</span><span>Grafana</span><span>Distributed Tracing</span><span>OpenTelemetry</span></div>
-        </div>
+        <h2>Stack</h2>
+        <p class="section-sub">What's actually in rotation, grouped by where it sits in the system.</p>
+        <div class="stack-layers" id="stackLayers"></div>
       </section>
 
       <section id="education">
         <div class="eyebrow">// academics</div>
         <h2>Education</h2>
-        <div class="timeline">
-          <div class="titem">
-            <div class="when">Aug 2024 – May 2026</div>
+        <div class="edu-grid">
+          <div class="edu-card">
+            <div class="edu-when">Aug 2024 – May 2026</div>
             <h3>The University of Texas at Dallas</h3>
-            <div class="degree">Master of Science, Computer Science</div>
-            <div class="gpa">GPA 3.84/4.0</div>
+            <div class="edu-degree">M.S., Computer Science</div>
+            <div class="edu-gpa">GPA 3.84 / 4.0</div>
           </div>
-          <div class="titem">
-            <div class="when">2018 – Jul 2022</div>
+          <div class="edu-card">
+            <div class="edu-when">2018 – Jul 2022</div>
             <h3>G. Narayanamma Institute of Technology and Science</h3>
-            <div class="degree">Bachelor of Technology, Computer Science</div>
-            <div class="gpa">CGPA 9.14/10.00</div>
+            <div class="edu-degree">B.Tech, Computer Science</div>
+            <div class="edu-gpa">CGPA 9.14 / 10.00</div>
           </div>
         </div>
       </section>
 
       <section id="contact">
         <div class="eyebrow">// let's talk</div>
-        <h2>Get in Touch</h2>
-        <p style="color:var(--muted); max-width:52ch;">Open to software engineering roles in distributed systems, cloud infrastructure, and AI infra. Based in San Jose, CA — open to relocation.</p>
+        <h2>Get in touch</h2>
+        <p class="section-sub">Open to software engineering roles in backend, distributed systems, cloud infrastructure, and AI infra.</p>
         <div class="contact-row">
-          <a href="mailto:shubhasri.work@gmail.com">✉ shubhasri.work@gmail.com</a>
+          <a class="primary" href="mailto:shubhasri.work@gmail.com">✉ Email me</a>
+          <button id="copyEmail" type="button">⧉ Copy email</button>
           <a href="tel:+12127319072">☎ (212) 731-9072</a>
           <a href="https://linkedin.com/in/shubhasrivanam" target="_blank" rel="noopener">in/ LinkedIn</a>
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
         </div>
       </section>
 
@@ -336,5 +345,309 @@
     <footer>© 2026 Shubhasri Vanam · built with GitHub Pages</footer>
   </main>
 
+  <!-- command palette -->
+  <div class="cmdk-scrim" id="cmdkScrim" role="dialog" aria-modal="true" aria-label="Quick navigation">
+    <div class="cmdk-panel">
+      <input class="cmdk-input" id="cmdkInput" type="text" placeholder="Jump to a section, or copy a contact..." autocomplete="off">
+      <div class="cmdk-list" id="cmdkList"></div>
+    </div>
+  </div>
+
+<script>
+  // ---------------- data ----------------
+  const pipeline = [
+    {
+      id:'gnits', type:'education', when:'2018 – Jul 2022',
+      title:'B.Tech, Computer Science', org:'GNITS', loc:'Hyderabad, India',
+      body:['CGPA 9.14 / 10.00'], gpa:true
+    },
+    {
+      id:'jpmc-intern', type:'work', when:'Feb 2022 – Aug 2022',
+      title:'Software Engineering Intern', org:'JPMorgan Chase & Co.', loc:'Hyderabad, India',
+      body:[
+        'Researched and designed an event-driven architecture for on-demand EMR cluster automation; the approved design shaped the production EMRCC architecture.',
+        'Built a Quick Cluster spin-up PoC for self-service cluster creation, scheduling, and monitoring, validating EMRCC\u2019s foundation.'
+      ]
+    },
+    {
+      id:'jpmc-sde2', type:'work', when:'Aug 2022 – Aug 2024',
+      title:'Software Development Engineer II', org:'JPMorgan Chase & Co.', loc:'Hyderabad, India',
+      body:[
+        'Built a Data Movement Service migrating 4 PB/day from on-prem to AWS S3, enabling cloud adoption across 1,500+ engineering teams.',
+        'Architected a distributed orchestration layer dynamically provisioning GKE agents — 5\u00d7 parallelism, 45% lower scheduling latency.',
+        'Implemented file size-aware workload partitioning, increasing average transfer size by 35%.',
+        'Designed SQS Dead Letter Queue recovery workflows, auto-resolving 99.9% of failed transfers at petabyte scale.',
+        'Built the Interactive EMR Cluster Controller (EMRCC) with REST APIs, driving adoption across 40% of the firm\u2019s Big Data workloads.',
+        'Re-architected EMRCC as a serverless platform (Lambda, ALB, SQS, SNS, S3), cutting idle resource usage by 90%.',
+        'Automated multi-account infrastructure provisioning with Terraform, reducing environment setup time by 85%.',
+        'Reviewed Terraform modules and infra configs across a 12-engineer team, enforcing deployment standards.'
+      ]
+    },
+    {
+      id:'utd', type:'education', when:'Aug 2024 – May 2026',
+      title:'M.S., Computer Science', org:'UT Dallas', loc:'Richardson, Texas',
+      body:['GPA 3.84 / 4.0'], gpa:true
+    },
+    {
+      id:'paypal', type:'work', when:'May 2025 – Aug 2025',
+      title:'Software Engineering Intern', org:'PayPal', loc:'San Jose, California',
+      body:[
+        'Engineered a deduplication layer for the Export API using distributed tracing, reducing p99 latency by 33% across 7M+ daily requests.',
+        'Implemented circuit breakers and retry-with-backoff for downstream dependencies, cutting service-related error rates by 40%.',
+        'Built Datadog-based observability across 8+ services and 5M+ customer profiles, reducing MTTD 40% and eliminating 720+ hours/year of manual analysis.'
+      ]
+    },
+    {
+      id:'now', type:'now', when:'Now', title:'Interviewing', org:'Infrastructure & Backend roles', loc:'San Jose, CA · open to relocation',
+      body:['Currently talking to teams working on distributed systems, cloud infrastructure, and AI/agent infrastructure. Open to relocation.']
+    }
+  ];
+
+  const services = [
+    {
+      name:'Distributed Key-Value Store', stack:'C++ · gRPC · Raft · Consistent Hashing · Prometheus',
+      metric:'20K ops/sec · sub-5ms p99',
+      bullets:[
+        'Fault-tolerant KV store using Raft consensus, leader election, and log replication across a 5-node cluster — 99.9% write durability under single-node failures.',
+        'Consistent hashing partitioning with virtual nodes, sustaining 20,000 ops/sec at sub-5ms p99 latency under network partitions.'
+      ]
+    },
+    {
+      name:'High-Throughput Log Aggregation System', stack:'C++ · gRPC · Protocol Buffers · Prometheus · GCP Cloud Run',
+      metric:'10K+ events/sec · sub-10ms p99',
+      bullets:[
+        'Log ingestion pipeline in C++ with a gRPC interface on GCP Cloud Run, supporting 10K+ events/sec at sub-10ms p99 latency.',
+        'Optimized serialization with Protocol Buffers and batch compression, cutting bandwidth usage by 40%.'
+      ]
+    },
+    {
+      name:'CareerCompanion — AI Resume Optimizer', stack:'Python · Flask · SBERT · T5 · spaCy · BM25/TF-IDF',
+      metric:'hybrid BM25 + SBERT scoring',
+      bullets:[
+        'Built an AI-powered resume optimization web app combining BM25/TF-IDF keyword matching with SBERT semantic similarity to score resume-job fit.',
+        'Added a T5-based cover letter generation engine and spaCy-driven entity extraction for structured resume parsing.'
+      ]
+    },
+    {
+      name:'Zero-Shot DNS Exfiltration Detection', stack:'LLaMA 3.1 8B · Groq API · Python',
+      metric:'zero-shot · CIC-Bell-DNS-EXF-2021',
+      bullets:[
+        'Designed a zero-shot LLM-based detector for DNS data exfiltration using LLaMA 3.1 8B served via the Groq API.',
+        'Evaluated detection performance against the CIC-Bell-DNS-EXF-2021 benchmark dataset as part of a network security research project.'
+      ]
+    }
+  ];
+
+  const stackLayers = [
+    { label:'Languages', tags:['Java','Python','C++','SQL'] },
+    { label:'Cloud & Infrastructure', tags:['GCP','AWS','Kubernetes','Docker','Terraform'] },
+    { label:'Data & Databases', tags:['Apache Spark','PostgreSQL','Redis','DynamoDB','MongoDB','Cassandra'] },
+    { label:'Messaging & Streaming', tags:['Apache Kafka','RabbitMQ','AWS SQS/SNS','Pub/Sub'] },
+    { label:'Backend & APIs', tags:['REST APIs','FastAPI','gRPC','GraphQL'] },
+    { label:'CI/CD & DevOps', tags:['Jenkins','GitHub Actions','Bitbucket','Git'] },
+    { label:'Observability', tags:['Datadog','Prometheus','Grafana','Distributed Tracing','OpenTelemetry'] }
+  ];
+
+  // ---------------- render: pipeline ----------------
+  const pipelineEl = document.getElementById('pipeline');
+  const pdetailEl = document.getElementById('pdetail');
+
+  pipeline.forEach((node, i) => {
+    const el = document.createElement('div');
+    el.className = 'pnode';
+    el.dataset.type = node.type;
+    el.setAttribute('role','listitem');
+    el.innerHTML = `
+      <div class="pline"></div>
+      <button class="pdot-btn" aria-expanded="false" data-id="${node.id}">
+        <span class="pdot"></span>
+        <span class="pmeta">${node.when}</span>
+        <span class="ptitle">${node.title}</span>
+        <span class="porg">${node.org}</span>
+      </button>
+    `;
+    pipelineEl.appendChild(el);
+  });
+
+  function renderDetail(node){
+    pdetailEl.innerHTML = `
+      <div class="dhead">
+        <div class="dtitle">${node.title} · <span class="dorg">${node.org}</span></div>
+        <div class="dwhen">${node.when}</div>
+      </div>
+      <div class="dloc">${node.loc}</div>
+      <ul>${node.body.map(b => `<li>${b}</li>`).join('')}</ul>
+      ${node.gpa ? '' : ''}
+    `;
+    pdetailEl.classList.add('open');
+  }
+
+  function openNode(id){
+    const node = pipeline.find(n => n.id === id);
+    if(!node) return;
+    document.querySelectorAll('.pdot-btn').forEach(b => b.setAttribute('aria-expanded', b.dataset.id === id ? 'true' : 'false'));
+    renderDetail(node);
+  }
+
+  pipelineEl.addEventListener('click', e => {
+    const btn = e.target.closest('.pdot-btn');
+    if(!btn) return;
+    openNode(btn.dataset.id);
+    pdetailEl.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  });
+
+  openNode('now');
+
+  // ---------------- render: services (projects) ----------------
+  const servicesEl = document.getElementById('services');
+  services.forEach((svc, i) => {
+    const el = document.createElement('div');
+    el.className = 'svc';
+    el.innerHTML = `
+      <button class="svc-head" aria-expanded="false">
+        <span class="svc-status"></span>
+        <span class="svc-titles">
+          <h3>${svc.name}</h3>
+          <div class="svc-stack">${svc.stack}</div>
+        </span>
+        <span class="svc-metric">${svc.metric}</span>
+        <span class="svc-chevron">›</span>
+      </button>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <div class="svc-metric-mobile">${svc.metric}</div>
+          <ul>${svc.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+        </div>
+      </div>
+    `;
+    servicesEl.appendChild(el);
+  });
+
+  servicesEl.addEventListener('click', e => {
+    const head = e.target.closest('.svc-head');
+    if(!head) return;
+    const card = head.closest('.svc');
+    const isOpen = card.classList.toggle('open');
+    head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // open first project by default
+  servicesEl.firstElementChild.classList.add('open');
+  servicesEl.firstElementChild.querySelector('.svc-head').setAttribute('aria-expanded','true');
+
+  // ---------------- render: stack layers ----------------
+  const stackEl = document.getElementById('stackLayers');
+  stackLayers.forEach(layer => {
+    const el = document.createElement('div');
+    el.className = 'layer';
+    el.innerHTML = `
+      <div class="layer-label">${layer.label}</div>
+      <div class="layer-tags">${layer.tags.map(t => `<span>${t}</span>`).join('')}</div>
+    `;
+    stackEl.appendChild(el);
+  });
+
+  // ---------------- scroll spy ----------------
+  const navLinks = document.querySelectorAll('nav.top a');
+  const sections = ['hero','projects','stack','education','contact'].map(id => document.getElementById(id));
+  const spyMap = { hero:'#path', projects:'#projects', stack:'#stack', education:'#education', contact:'#contact' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const href = spyMap[entry.target.id];
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === href));
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => s && observer.observe(s));
+
+  // path link should scroll to hero (pipeline lives in hero)
+  document.querySelector('a[href="#path"]').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('hero').scrollIntoView({ behavior:'smooth' });
+  });
+
+  // ---------------- copy email ----------------
+  document.getElementById('copyEmail').addEventListener('click', async (e) => {
+    try{
+      await navigator.clipboard.writeText('shubhasri.work@gmail.com');
+      const btn = e.currentTarget;
+      const original = btn.innerHTML;
+      btn.innerHTML = '✓ Copied';
+      setTimeout(() => { btn.innerHTML = original; }, 1600);
+    }catch(err){ /* clipboard unavailable, ignore */ }
+  });
+
+  // ---------------- command palette ----------------
+  const cmdItems = [
+    { label:'Career pipeline', tag:'section', action: () => document.getElementById('hero').scrollIntoView({behavior:'smooth'}) },
+    { label:'Projects', tag:'section', action: () => document.getElementById('projects').scrollIntoView({behavior:'smooth'}) },
+    { label:'Stack', tag:'section', action: () => document.getElementById('stack').scrollIntoView({behavior:'smooth'}) },
+    { label:'Education', tag:'section', action: () => document.getElementById('education').scrollIntoView({behavior:'smooth'}) },
+    { label:'Contact', tag:'section', action: () => document.getElementById('contact').scrollIntoView({behavior:'smooth'}) },
+    { label:'Email shubhasri.work@gmail.com', tag:'copy', action: () => navigator.clipboard.writeText('shubhasri.work@gmail.com').catch(()=>{}) },
+    { label:'Open LinkedIn', tag:'link', action: () => window.open('https://linkedin.com/in/shubhasrivanam','_blank') },
+    { label:'Open GitHub', tag:'link', action: () => window.open('https://github.com/','_blank') }
+  ];
+
+  const scrim = document.getElementById('cmdkScrim');
+  const input = document.getElementById('cmdkInput');
+  const list = document.getElementById('cmdkList');
+  let activeIdx = 0;
+
+  function renderList(filter=''){
+    const f = filter.toLowerCase();
+    const filtered = cmdItems.filter(i => i.label.toLowerCase().includes(f));
+    list.innerHTML = filtered.length
+      ? filtered.map((i, idx) => `<div class="cmdk-item${idx===activeIdx?' active':''}" data-idx="${idx}"><span>${i.label}</span><span class="tag">${i.tag}</span></div>`).join('')
+      : `<div class="cmdk-empty">No matches</div>`;
+    list.dataset.filtered = JSON.stringify(filtered.map(i => i.label));
+    return filtered;
+  }
+
+  let currentFiltered = cmdItems;
+
+  function openPalette(){
+    scrim.classList.add('show');
+    input.value = '';
+    activeIdx = 0;
+    currentFiltered = renderList('');
+    setTimeout(() => input.focus(), 30);
+  }
+  function closePalette(){ scrim.classList.remove('show'); }
+
+  document.getElementById('cmdk-trigger').addEventListener('click', openPalette);
+  scrim.addEventListener('click', (e) => { if(e.target === scrim) closePalette(); });
+
+  document.addEventListener('keydown', (e) => {
+    if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){
+      e.preventDefault();
+      scrim.classList.contains('show') ? closePalette() : openPalette();
+    } else if(e.key === 'Escape' && scrim.classList.contains('show')){
+      closePalette();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    activeIdx = 0;
+    currentFiltered = renderList(input.value);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowDown'){ e.preventDefault(); activeIdx = Math.min(activeIdx+1, currentFiltered.length-1); renderList(input.value); }
+    else if(e.key === 'ArrowUp'){ e.preventDefault(); activeIdx = Math.max(activeIdx-1, 0); renderList(input.value); }
+    else if(e.key === 'Enter'){
+      const item = currentFiltered[activeIdx];
+      if(item){ item.action(); closePalette(); }
+    }
+  });
+
+  list.addEventListener('click', (e) => {
+    const row = e.target.closest('.cmdk-item');
+    if(!row) return;
+    const item = currentFiltered[Number(row.dataset.idx)];
+    if(item){ item.action(); closePalette(); }
+  });
+</script>
 </body>
 </html>
