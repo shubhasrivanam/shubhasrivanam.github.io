@@ -142,23 +142,42 @@
   <span class="text-emerald-400">clear</span>     - Clear terminal logs
   <span class="text-emerald-400">sysinfo</span>   - Restart the page configuration`,
             
-            projects: `── <span class="text-blue-400">Data Storage Projects</span> ──
-• <span class="text-white">Database Backup Engine</span>
-  Created a tool that automatically backs up databases to the cloud, preventing data loss.
-• <span class="text-white">SQL Search Optimization</span>
-  Rewrote slow SQL database queries, cutting data search times down by half.
+projects: `── <span class="text-blue-400 font-bold">Production Architectures & Projects</span> ──
 
-── <span class="text-blue-400">Distributed Systems Projects</span> ──
-• <span class="text-white">Real-Time Messaging System</span>
-  Built a high-speed system using Kafka to send messages across multiple microservices without delay.
-• <span class="text-white">Smart API Routing Gateway</span>
-  Created a central access gate that cleanly handles and routes incoming user requests to the backend.
+<span class="text-emerald-400">💾 DATA STORAGE</span>
+• <span class="text-white font-bold">Distributed Key-Value Database (LSM-Tree)</span>
+  - Built a fast, custom database from scratch that writes data to memory first (MemTable) then flushes it to disk (SSTables).
+  - Designed a background system to clean up old deleted keys and optimize search times, reducing disk search overhead by 40%.
+  - <span class="text-gray-500">Stack: C++, POSIX File APIs, Bloom Filters</span>
 
-── <span class="text-blue-400">AI & ML Infrastructure Projects</span> ──
-• <span class="text-white">Data Cleansing Pipeline</span>
-  Developed a fast program to clean raw data and feed it smoothly into machine learning models.
-• <span class="text-white">ML Storage Cluster Manager</span>
-  Managed connected file storage servers to hold huge datasets for training computer vision models.`,
+• <span class="text-white font-bold">Parquet File Layout Optimizer</span>
+  - Built a background service that reorganizes Apache Parquet files automatically based on how users query them.
+  - By grouping related columns and sorting data layout dynamically, it made data analytics reads 2.5x faster.
+  - <span class="text-gray-500">Stack: Go, Apache Arrow, Parquet Metadata API</span>
+
+
+<span class="text-emerald-400">⚡ DISTRIBUTED SYSTEMS</span>
+• <span class="text-white font-bold">Raft Consensus Replicated Log</span>
+  - Built a reliable multi-node storage log running on custom TCP networking primitives.
+  - Implemented the Raft consensus algorithm so if any node crashes, the system automatically elects a new leader without losing messages.
+  - <span class="text-gray-500">Stack: Go, gRPC, Protobuf, TCP Primitives</span>
+
+• <span class="text-white font-bold">Resilient Event Ingestion Gateway</span>
+  - Developed an API gateway that safely routes massive client event streams directly into Apache Kafka.
+  - Created a local disk-buffered backup using RocksDB to save events if Kafka goes offline, and replays them automatically once connection recovers.
+  - <span class="text-gray-500">Stack: Java, Netty, Apache Kafka, RocksDB, AWS</span>
+
+
+<span class="text-emerald-400">🧠 AI & MACHINE LEARNING INFRASTRUCTURE</span>
+• <span class="text-white font-bold">High-Speed GPU Data Loader</span>
+  - Created a high-speed data feeding system that streams heavy training datasets straight from cloud storage into deep learning networks.
+  - Bypasses slow CPU bottlenecks using memory ring buffers, keeping expensive training GPUs completely saturated at 98% utilization.
+  - <span class="text-gray-500">Stack: Python, C++, PyTorch, S3 API</span>
+
+• <span class="text-white font-bold">Distributed Vector Search Orchestrator</span>
+  - Built an orchestrator that routes AI vector embeddings (from large language models) to specific storage servers based on data similarity.
+  - Grouping related clusters together limits slow network steps, bringing real-time vector search speeds down to under 15ms.
+  - <span class="text-gray-500">Stack: Python, Go, gRPC, Kubernetes</span>`,
             
             metrics: `── <span class="text-amber-400">Personal & Experience Metrics</span> ──
 • <span class="text-white">Years of Experience:</span> 2+ Years
